@@ -1,0 +1,17 @@
+{
+    "question": {
+        "content": "{{CONTENT}}",
+        "images": {},
+        "widgets": {}
+    },
+    "answerArea": {
+        "type": "multiple",
+        "options": {
+            "content": "",
+            "images": {},
+            "widgets": {}
+        },
+        "calculator": false
+    },
+    "hints": []
+}

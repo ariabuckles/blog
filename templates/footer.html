@@ -1,4 +1,20 @@
-<div>hi</div>
+</script>
+<script>
+Perseus.init({skipMathJax: false}).then(function() {
 
+    var props = _.defaults({}, window.jsonContent.question, {
+        problemNum: 0
+    });
+
+    editor = React.renderComponent(
+        Perseus.Renderer(props, null),
+        document.getElementById("perseus-container")
+    );
+
+}).then(function() {
+}, function(err) {
+    console.error(err);
+});
+</script>
 </body>
 </html>
