@@ -46,7 +46,7 @@ $(MD_OUTPUT_FILES): build/%/index.html: posts/%.md $(MD_OUTPUT_DIRS) templates
 	echo "$(<:posts/%.md=%)" >> $@
 	cat templates/body.html >> $@
 	echo "var CONTENT = '' +" >> $@
-	sed -e 's/"/\\"/' -e 's/^/"/' -e 's/$$/" +/' $< >> $@
+	sed -e 's/"/\\"/' -e 's/^/"/' -e 's/$$/\\n" + /' $< >> $@
 	echo "'';" >> $@
 	echo "window.jsonContent = " >> $@
 	sed -e 's/"{{CONTENT}}"/CONTENT/' templates/markdown.json >> $@
