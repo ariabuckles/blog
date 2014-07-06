@@ -10,7 +10,8 @@
   "author": "",
   "license": "proprietary",
   "devDependencies": {
-    "aletheia": "0.0.4"
+    "aletheia": "0.0.4",
+    "http-server": "^0.6.1"
   },
   "dependencies": {
     "perseus": "git://github.com/Khan/perseus",

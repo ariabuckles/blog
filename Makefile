@@ -1,4 +1,4 @@
-.PHONY: all create_build_dir build perseus_dev_tools build_ke build_perseus npm_install clean
+.PHONY: all create_build_dir build perseus_dev_tools build_ke build_perseus npm_install server clean
 
 all: install build
 
@@ -46,6 +46,10 @@ $(MD_OUTPUT_FILES): build/%/index.html: posts/%.md $(MD_OUTPUT_DIRS) templates
 	echo % >> $@
 	cat templates/body.html >> $@
 	cat templates/footer.html >> $@
+
+PORT=6060
+server:
+	./node_modules/.bin/http-server build -p $(PORT)
 
 clean:
 	rm -rf build
