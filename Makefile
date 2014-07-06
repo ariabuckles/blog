@@ -43,7 +43,7 @@ $(MD_OUTPUT_DIRS): build/%: posts/%.md
 
 $(MD_OUTPUT_FILES): build/%/index.html: posts/%.md $(MD_OUTPUT_DIRS) templates
 	cat templates/header.html > $@
-	echo % >> $@
+	echo "$(<:posts/%.md=%)" >> $@
 	cat templates/body.html >> $@
 	cat templates/footer.html >> $@
 
