@@ -1,0 +1,52 @@
+</title>
+
+<link rel="stylesheet" type="text/css" href="build/khan-site.css" />
+<link rel="stylesheet" type="text/css" href="build/khan-exercise.css" />
+<link rel="stylesheet" type="text/css" href="build/perseus/katex/fonts/fonts.css" />
+<link rel="stylesheet/less" type="text/css" href="build/perseus/katex/katex.less" />
+<link rel="stylesheet" type="text/css" href="build/perseus/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="build/perseus/mathquill/mathquill.css" />
+<link rel="stylesheet" type="text/css" href="build/perseus.css" />
+
+<script src="build/perseus/less.js"></script>
+<script src="build/perseus/jquery.js"></script>
+<script src="build/perseus/underscore.js"></script>
+<script src="build/perseus/marked.js"></script>
+<script src="build/perseus/react-with-addons.js"></script>
+<script src="build/perseus/rcss.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full&amp;delayStartupUntil=configured"></script>
+<script src="build/perseus/katex/katex.js"></script>
+<script src="build/perseus/mathquill/mathquill.js"></script>
+<script src="build/perseus/kas.js"></script>
+
+<script>
+    var icu = {
+        getDecimalFormatSymbols: function() {
+            return {
+                decimal_separator: ".",
+                grouping_separator: ",",
+                minus: "-"
+            };
+        }
+    };
+    var KhanUtil = {
+        debugLog: function() {},
+        localeToFixed: function(num, precision) {
+            return num.toFixed(precision);
+        }
+    };
+    var Khan = {
+        Util: KhanUtil,
+        error: function() {},
+        query: {debug: ""},
+        imageBase: "/ke/images/",
+        scratchpad: {
+            enable: function() {},
+            disable: function() {}
+        }
+    };
+    React.initializeTouchEvents(true);
+</script>
+</head>
+<body>
+
