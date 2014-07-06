@@ -1,5 +1,6 @@
 </title>
 
+<!-- perseus/khan-exercises stylesheets -->
 <link rel="stylesheet" type="text/css" href="build/khan-site.css" />
 <link rel="stylesheet" type="text/css" href="build/khan-exercise.css" />
 <link rel="stylesheet" type="text/css" href="build/perseus/katex/fonts/fonts.css" />
@@ -7,8 +8,10 @@
 <link rel="stylesheet" type="text/css" href="build/perseus/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="build/perseus/mathquill/mathquill.css" />
 <link rel="stylesheet" type="text/css" href="build/perseus.css" />
-
+<!-- less preprocessor for said stylesheets -->
 <script src="build/perseus/less.js"></script>
+
+<!-- perseus scripts -->
 <script src="build/perseus/jquery.js"></script>
 <script src="build/perseus/underscore.js"></script>
 <script src="build/perseus/marked.js"></script>
@@ -19,6 +22,11 @@
 <script src="build/perseus/mathquill/mathquill.js"></script>
 <script src="build/perseus/kas.js"></script>
 
+<!-- khan-exercises scripts -->
+<script src="build/ke/jed.js"></script>
+<script src="build/ke/i18n.js"></script>
+<script src="build/ke/jquery.qtip.js"></script>
+<!-- khan-exercises globals stub -->
 <script>
     var icu = {
         getDecimalFormatSymbols: function() {
@@ -29,24 +37,11 @@
             };
         }
     };
-    var KhanUtil = {
-        debugLog: function() {},
-        localeToFixed: function(num, precision) {
-            return num.toFixed(precision);
-        }
-    };
-    var Khan = {
-        Util: KhanUtil,
-        error: function() {},
-        query: {debug: ""},
-        imageBase: "/ke/images/",
-        scratchpad: {
-            enable: function() {},
-            disable: function() {}
-        }
-    };
     React.initializeTouchEvents(true);
 </script>
+<script src="build/ke/exercises-stub.js"></script>
+<script src="build/ke.js"></script>
+
 </head>
 <body>
 
