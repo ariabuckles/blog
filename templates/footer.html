@@ -2,7 +2,10 @@
 <script>
 Perseus.init({skipMathJax: false}).then(function() {
 
-    var props = _.defaults({}, window.jsonContent.question, {
+    var content = window.jsonContent.question != null ?
+        window.jsonContent.question : window.jsonContent;
+
+    var props = _.defaults({}, content, {
         problemNum: 0
     });
 

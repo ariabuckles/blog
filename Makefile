@@ -8,13 +8,16 @@ AL_OUTPUT_FILES := $(AL_SOURCE_FILES:src/%.al=build/%.js)
 MD_SOURCE_FILES := $(wildcard posts/*.md)
 MD_OUTPUT_DIRS := $(MD_SOURCE_FILES:posts/%.md=build/%)
 MD_OUTPUT_FILES := $(MD_SOURCE_FILES:posts/%.md=build/%/index.html)
+JSON_SOURCE_FILES := $(wildcard posts/*.json)
+JSON_OUTPUT_DIRS := $(JSON_SOURCE_FILES:posts/%.json=build/%)
+JSON_OUTPUT_FILES := $(JSON_SOURCE_FILES:posts/%.json=build/%/index.html)
 
 install: npm_install build_ke build_perseus
 
 npm_install:
 	npm install
 
-build: create_build_dir $(AL_OUTPUT_FILES) $(MD_OUTPUT_FILES)
+build: create_build_dir $(AL_OUTPUT_FILES) $(MD_OUTPUT_FILES) $(JSON_OUTPUT_FILES)
 	cp stylesheets/* build/
 
 create_build_dir:
@@ -44,6 +47,9 @@ $(AL_OUTPUT_FILES): build/%.js: src/%.al node_modules
 $(MD_OUTPUT_DIRS): build/%: posts/%.md
 	mkdir -p $@
 
+$(JSON_OUTPUT_DIRS): build/%: posts/%.json
+	mkdir -p $@
+
 $(MD_OUTPUT_FILES): build/%/index.html: posts/%.md $(MD_OUTPUT_DIRS) templates
 	cat templates/header.html > $@
 	echo "$(<:posts/%.md=%)" >> $@
@@ -53,6 +59,14 @@ $(MD_OUTPUT_FILES): build/%/index.html: posts/%.md $(MD_OUTPUT_DIRS) templates
 	echo "'';" >> $@
 	echo "window.jsonContent = " >> $@
 	sed -e 's/"{{CONTENT}}"/CONTENT/' templates/markdown.json >> $@
+	cat templates/footer.html >> $@
+
+$(JSON_OUTPUT_FILES): build/%/index.html: posts/%.json $(JSON_OUTPUT_DIRS) templates
+	cat templates/header.html > $@
+	echo "$(<:posts/%.json=%)" >> $@
+	cat templates/body.html >> $@
+	echo "window.jsonContent = " >> $@
+	cat $< >> $@
 	cat templates/footer.html >> $@
 
 PORT=6060
