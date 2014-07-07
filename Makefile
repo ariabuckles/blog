@@ -15,6 +15,7 @@ npm_install:
 	npm install
 
 build: create_build_dir $(AL_OUTPUT_FILES) $(MD_OUTPUT_FILES)
+	cp stylesheets/* build/
 
 create_build_dir:
 	mkdir -p build
@@ -34,6 +35,8 @@ build_ke: create_build_dir perseus_dev_tools node_modules/perseus
 	rm -rf build/ke
 	cp -R node_modules/khan-exercises/local-only build/ke
 	cp node_modules/khan-exercises/exercises-stub.js build/ke/
+	cp node_modules/khan-exercises/css/khan-site.css build/ke/
+	cp node_modules/khan-exercises/css/khan-exercise.css build/ke/
 
 $(AL_OUTPUT_FILES): build/%.js: src/%.al node_modules
 	$(AL_COMPILER) $< $@
