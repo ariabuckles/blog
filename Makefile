@@ -16,6 +16,8 @@ install: npm_install build_ke build_perseus
 
 npm_install:
 	npm install
+	rm -rf node_modules/perseus
+	git clone https://github.com/Khan/perseus.git node_modules/perseus
 
 build: create_build_dir $(AL_OUTPUT_FILES) $(MD_OUTPUT_FILES) $(JSON_OUTPUT_FILES)
 	cp stylesheets/* build/
@@ -24,17 +26,17 @@ create_build_dir:
 	mkdir -p build
 
 perseus_dev_tools:
-	cd node_modules/perseus && npm install
+	cd node_modules/perseus && git submodule update --init && npm install
 
 build_perseus: create_build_dir node_modules/perseus
 	cd node_modules/perseus && make build
-	cp node_modules/perseus/build/perseus-0.js build/perseus.js
-	cp node_modules/perseus/build/perseus-0.css build/perseus.css
+	cp node_modules/perseus/build/perseus-1.js build/perseus.js
+	cp node_modules/perseus/build/perseus-1.css build/perseus.css
 	rm -rf build/perseus/
 	cp -R node_modules/perseus/lib build/perseus/
 
 build_ke: create_build_dir perseus_dev_tools node_modules/perseus
-	cd node_modules/khan-exercises && ../perseus/node_modules/.bin/r.js -o requirejs.config.js out=../../build/ke.js
+	./node_modules/.bin/webpack ke.webpack.config.js
 	rm -rf build/ke
 	cp -R node_modules/khan-exercises/local-only build/ke
 	cp node_modules/khan-exercises/exercises-stub.js build/ke/
@@ -71,7 +73,7 @@ $(JSON_OUTPUT_FILES): build/%/index.html: posts/%.json $(JSON_OUTPUT_DIRS) templ
 
 PORT=6060
 server:
-	./node_modules/.bin/http-server build -p $(PORT)
+	./node_modules/.bin/http-server build -a '::' -p $(PORT)
 
 clean:
 	rm -rf build
