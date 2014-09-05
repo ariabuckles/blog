@@ -38,7 +38,7 @@ naming and whether the spec is actually a spec. Other people
 have covered those issue much better than I can hope to.*
 
 [stmd]: http://standardmarkdown.com/
-[mdsyntax]: http://daringfireball.net/projects/Markdown/syntax
+[mdsyntax]: http://daringfireball.net/projects/markdown/syntax
 [spec]: http://jgm.github.io/stmd/spec.html
 
 
