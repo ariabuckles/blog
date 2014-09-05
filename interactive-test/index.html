@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>
+interactive-test
+</title>
+
+<!-- perseus/khan-exercises stylesheets -->
+<link rel="stylesheet" type="text/css" href="../ke/khan-site.css" />
+<link rel="stylesheet" type="text/css" href="../ke/khan-exercise.css" />
+<link rel="stylesheet" type="text/css" href="../perseus/katex/fonts/fonts.css" />
+<link rel="stylesheet/less" type="text/css" href="../perseus/katex/katex.less" />
+<link rel="stylesheet" type="text/css" href="../perseus/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../perseus/mathquill/mathquill.css" />
+<link rel="stylesheet" type="text/css" href="../perseus.css" />
+<link rel="stylesheet/less" type="text/css" href="../blog.less" />
+<!-- less preprocessor for said stylesheets -->
+<script src="../perseus/less.js"></script>
+
+<!-- perseus scripts -->
+<script src="../perseus/jquery.js"></script>
+<script src="../perseus/underscore.js"></script>
+<script src="../perseus/marked.js"></script>
+<script src="../perseus/react-with-addons.js"></script>
+<script src="../perseus/rcss.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full&amp;delayStartupUntil=configured"></script>
+<script src="../perseus/katex/katex.js"></script>
+<script src="../perseus/mathquill/mathquill.js"></script>
+<script src="../perseus/kas.js"></script>
+
+<!-- khan-exercises scripts -->
+<script src="../ke/jed.js"></script>
+<script src="../ke/i18n.js"></script>
+<script src="../ke/jquery.qtip.js"></script>
+<!-- khan-exercises globals stub -->
+<script>
+    var icu = {
+        getDecimalFormatSymbols: function() {
+            return {
+                decimal_separator: ".",
+                grouping_separator: ",",
+                minus: "-"
+            };
+        }
+    };
+    React.initializeTouchEvents(true);
+</script>
+<script src="../ke/exercises-stub.js"></script>
+<script src="../ke.js"></script>
+
+<!-- main perseus script -->
+<script src="../perseus.js"></script>
+
+</head>
+<body class="page-body">
+
+<div class="post-wrapper">
+<div id="perseus" class="framework-perseus">
+</div>
+</div>
+
+<script>
+window.jsonContent = 
+{
+    "question": {
+        "content": "Test blog\n=========\n\nThis is a *test* page. Hi!\n\nUm, what are other markdown features?\n\nLet's try a list\n\n * hi\n * bye\n * there\n\nhave a widget!\n\n[[☃ interactive-graph 1]]",
+        "images": {},
+        "widgets": {
+            "interactive-graph 1": {
+                "type": "interactive-graph",
+                "graded": true,
+                "options": {
+                    "step": [
+                        1,
+                        1
+                    ],
+                    "backgroundImage": {
+                        "url": null,
+                        "scale": 1,
+                        "bottom": 0,
+                        "left": 0
+                    },
+                    "markings": "graph",
+                    "labels": [
+                        "x",
+                        "y"
+                    ],
+                    "showProtractor": false,
+                    "showRuler": false,
+                    "rulerLabel": "",
+                    "rulerTicks": 10,
+                    "range": [
+                        [
+                            -10,
+                            10
+                        ],
+                        [
+                            -10,
+                            10
+                        ]
+                    ],
+                    "gridStep": [
+                        1,
+                        1
+                    ],
+                    "snapStep": [
+                        0.5,
+                        0.5
+                    ],
+                    "graph": {
+                        "type": "linear"
+                    },
+                    "correct": {
+                        "type": "linear",
+                        "coords": [
+                            [
+                                0,
+                                0
+                            ],
+                            [
+                                5,
+                                5
+                            ]
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "answerArea": {
+        "type": "multiple",
+        "options": {
+            "content": "",
+            "images": {},
+            "widgets": {}
+        },
+        "calculator": false
+    },
+    "hints": []
+}
+</script>
+<script>
+Perseus.init({skipMathJax: false}).then(function() {
+
+    var content = window.jsonContent.question != null ?
+        window.jsonContent.question : window.jsonContent;
+
+    var props = _.defaults({}, content, {
+        problemNum: 0
+    });
+
+    editor = React.renderComponent(
+        Perseus.Renderer(props, null),
+        document.getElementById("perseus")
+    );
+
+}).then(function() {
+}, function(err) {
+    console.error(err);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>
+common-markdown
+</title>
+
+<!-- perseus/khan-exercises stylesheets -->
+<link rel="stylesheet" type="text/css" href="../ke/khan-site.css" />
+<link rel="stylesheet" type="text/css" href="../ke/khan-exercise.css" />
+<link rel="stylesheet" type="text/css" href="../perseus/katex/fonts/fonts.css" />
+<link rel="stylesheet/less" type="text/css" href="../perseus/katex/katex.less" />
+<link rel="stylesheet" type="text/css" href="../perseus/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../perseus/mathquill/mathquill.css" />
+<link rel="stylesheet" type="text/css" href="../perseus.css" />
+<link rel="stylesheet/less" type="text/css" href="../blog.less" />
+<!-- less preprocessor for said stylesheets -->
+<script src="../perseus/less.js"></script>
+
+<!-- perseus scripts -->
+<script src="../perseus/jquery.js"></script>
+<script src="../perseus/underscore.js"></script>
+<script src="../perseus/marked.js"></script>
+<script src="../perseus/react-with-addons.js"></script>
+<script src="../perseus/rcss.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full&amp;delayStartupUntil=configured"></script>
+<script src="../perseus/katex/katex.js"></script>
+<script src="../perseus/mathquill/mathquill.js"></script>
+<script src="../perseus/kas.js"></script>
+
+<!-- khan-exercises scripts -->
+<script src="../ke/jed.js"></script>
+<script src="../ke/i18n.js"></script>
+<script src="../ke/jquery.qtip.js"></script>
+<!-- khan-exercises globals stub -->
+<script>
+    var icu = {
+        getDecimalFormatSymbols: function() {
+            return {
+                decimal_separator: ".",
+                grouping_separator: ",",
+                minus: "-"
+            };
+        }
+    };
+    React.initializeTouchEvents(true);
+</script>
+<script src="../ke/exercises-stub.js"></script>
+<script src="../ke.js"></script>
+
+<!-- main perseus script -->
+<script src="../perseus.js"></script>
+
+</head>
+<body class="page-body">
+
+<div class="post-wrapper">
+<div id="perseus" class="framework-perseus">
+</div>
+</div>
+
+<script>
+var CONTENT = '' +
+"Why Common Markdown isn't the Solution\n" + 
+"========================================\n" + 
+"\n" + 
+"[Common Markdown][stmd] (previously Standard Markdown)\n" + 
+"came out yesterday, promising to be a\n" + 
+"single Markdown spec to rule them all. As I've been writing a\n" + 
+"Markdown parser over the past few weeks, this was very exciting!\n" + 
+"Finally I would know what to do about the various edge cases\n" + 
+"not layed out in the [original Markdown syntax specification]\n" + 
+"[mdsyntax]!\n" + 
+"\n" + 
+"First off, Common Markdown looks wonderful to write in. As a\n" + 
+"content author, it looks like it would be much more preferable\n" + 
+"to the current Markdown parser I'm using. For the vast\n" + 
+"majority of cases, it looks like it does what I would mean\n" + 
+"when I write something, making it very easy to work with as a\n" + 
+"content author. The parser also looks like a nice implementation,\n" + 
+"which is much less hacky than many I've seen. I think it's\n" + 
+"wonderful that Common Markdown is putting effort into making\n" + 
+"the language better in these directions!\n" + 
+"\n" + 
+"However, Common Markdown states that one of its goals is\n" + 
+"\"to make Markdown easier to parse, and to eliminate the many\n" + 
+"old inconsistencies and ambiguities that made writing a Markdown\n" + 
+"parser so difficult.\"\n" + 
+"I've been working on a Markdown parser for the past\n" + 
+"few weeks, and in this respect Common Markdown looks like it\n" + 
+"is going to cause more problems than it solves.\n" + 
+"Common Markdown does a good job of making a lot of decisions\n" + 
+"about edge cases, but it does so often by canonizing many\n" + 
+"complex divergences from the original specification.\n" + 
+"Ultimately, this makes [Common Markdown Spec][spec] very long\n" + 
+"and riddled with endless intricacies that will make working\n" + 
+"with the language as a programmer more difficult.\n" + 
+"\n" + 
+"*Note: I'm not going to talk about the standard issues around\n" + 
+"naming and whether the spec is actually a spec. Other people\n" + 
+"have covered those issue much better than I can hope to.*\n" + 
+"\n" + 
+"[stmd]: http://standardmarkdown.com/\n" + 
+"[mdsyntax]: http://daringfireball.net/projects/Markdown/syntax\n" + 
+"[spec]: http://jgm.github.io/stmd/spec.html\n" + 
+"\n" + 
+"\n" + 
+"## Let's look at some of those intricacies:\n" + 
+"\n" + 
+"### Paragraphs:\n" + 
+"\n" + 
+"Here's what two paragraphs looks like:\n" + 
+"\n" + 
+"    paragraph 1\n" + 
+"\n" + 
+"    paragraph 2\n" + 
+"\n" + 
+"Of course, if we put a line of text in between, they become one\n" + 
+"paragraph, since they aren't separated by a blank line anymore:\n" + 
+"\n" + 
+"    paragraph 1\n" + 
+"    line of text\n" + 
+"    paragraph 2\n" + 
+"\n" + 
+"If we do the same thing but with `'%'` symbols, the same thing\n" + 
+"happens:\n" + 
+"\n" + 
+"    paragraph 1\n" + 
+"    %%%\n" + 
+"    paragraph 2\n" + 
+"\n" + 
+"But if we replace the `'%'`s with `'*'`s, we get a horizontal rule:\n" + 
+"\n" + 
+"    paragraph 1\n" + 
+"    ***\n" + 
+"    paragraph 2\n" + 
+"\n" + 
+"Or if we replace the `'%'`s with `'-'`s, we get a heading.\n" + 
+"Or if we use `'#'`s, we get paragraphs that are separated a bit more\n" + 
+"than usual, because the middle line is a heading.\n" + 
+"\n" + 
+"All of this means that it is not possible to write a simple rule for\n" + 
+"when a paragraph (or other block element) ends. When a paragraph\n" + 
+"ends is context dependent on what happens after that paragraph. And\n" + 
+"while the rules are predictable for Common Markdown, there are\n" + 
+"still a lot of rules, which you need to know when you write a line\n" + 
+"break. But moreover, anyone who adds an extension to the language\n" + 
+"has the possibility of changing the semantics of paragraphs written in\n" + 
+"Common Markdown.\n" + 
+"\n" + 
+"For example, if we added github-flavored table syntax, the following:\n" + 
+"\n" + 
+"    a paragraph\n" + 
+"    maybe | table\n" + 
+"    -|-\n" + 
+"\n" + 
+"changes semantically from a single block level element to two block\n" + 
+"level elements. Consider if, instead, we required a paragraph to be\n" + 
+"separated from the next block element by a blank line. Now, we don't\n" + 
+"have to wonder when writing a `|` whether the dialect we are using\n" + 
+"supports tables, and therefore whether writing `|` will add it to\n" + 
+"the paragraph we are in or create a new element. But more importantly,\n" + 
+"if we have a lot of content written in this Markdown dialect, and\n" + 
+"we decide to support tables now, we don't have to worry as much about\n" + 
+"whether we will accidentally transform someone's previously\n" + 
+"innocuous text into something they did not intend.\n" + 
+"\n" + 
+"(I'll admit that this example with tables is a little\n" + 
+"contrived--`-|-` is unlikely to be used in content that one wouldn't\n" + 
+"want to be a table. But it's a well known example of a problem that\n" + 
+"can easily occur given the number of Markdown dialects available.)\n" + 
+"\n" + 
+"### Links:\n" + 
+"\n" + 
+"Links can look like\n" + 
+"`[this](http://example.com)` or\n" + 
+"`[this](<http://example.com>)` or\n" + 
+"`[this][1]` or\n" + 
+"`[this][]` or\n" + 
+"`[this]` or\n" + 
+"`<http://this>` or\n" + 
+"`[this]((foo)and(bar))`.\n" + 
+"But not `http://this.example.com`, because that would be silly.\n" + 
+"\n" + 
+"That is too many link types!\n" + 
+"Yes, several of them fix certain things that are difficult with\n" + 
+"other link types (`'<'`).\n" + 
+"But some of them are just convenient shorthand: `[this]` is\n" + 
+"two characters shorter than `[this][]`, and means that\n" + 
+"the resulting text formatting depends on whether a link\n" + 
+"target for `[this]` exists *anywhere else in the document*.\n" + 
+"The single level of parentheses nesting inside links, while\n" + 
+"convenient for authoring content that may link to Wikipedia,\n" + 
+"adds a lot of complexity to parsing. This isn't hard to\n" + 
+"implement in a parser that fully tokenizes things at the\n" + 
+"character level, but to add this to most of the existing\n" + 
+"javascript parsers that match a whole link as a single\n" + 
+"token, this would change the link regex from something like:\n" + 
+"\n" + 
+"    /^\(([^\)]*)\)/\n" + 
+"\n" + 
+"to something like:\n" + 
+"\n" + 
+"    /^\(([^\(\)]*(?:\([^\(\)]*\)[^\(\)]*)*)\)/\n" + 
+"\n" + 
+"Maybe this change is worth it to content creators. But given that\n" + 
+"this often does not work in today's Markdown parsers, this,\n" + 
+"and the several extensions like this, should not be part of the\n" + 
+"core standard language.\n" + 
+"\n" + 
+"### Inline HTML:\n" + 
+"\n" + 
+"Of course, no Markdown spec is complete without allowing users\n" + 
+"to inject arbitrary code into your website. While embedded HTML\n" + 
+"makes sense for a static site generator, Markdown today is used\n" + 
+"in many places where inline HTML is dangerous and shouldn't\n" + 
+"be allowed. But instead of a html being an optional extension\n" + 
+"(which would probably be supported only to various\n" + 
+"degrees--several sites allow for embedding only a small subset\n" + 
+"of HTML), we have an HTML grammar in the middle of our\n" + 
+"Markdown specification. This rule alone means that many places\n" + 
+"that would like to support Markdown will not be able to comply\n" + 
+"with Common Markdown--which would be fine if Common Markdown\n" + 
+"was a dialect, but unfortunate if Common Markdown is considered\n" + 
+"a standard.\n" + 
+"\n" + 
+"## Why is Markdown everywhere?\n" + 
+"\n" + 
+"All of these complexities come in the name of writing convenience.\n" + 
+"That certainly seems like a reasonable goal--it would be wonderful if,\n" + 
+"when you write something, your meaning is understood and conveyed into\n" + 
+"the output correctly. That's the road Common Markdown has taken, and\n" + 
+"it's a reasonable road if you want to build a book-writing platform.\n" + 
+"\n" + 
+"But Markdown didn't get where it is today by being the ideal format\n" + 
+"to write longform text in (it certainly is a wonderful format to\n" + 
+"write longform text in, and if you're looking for a dialect to do\n" + 
+"exactly that, Common Markdown looks like a very nice dialect to\n" + 
+"work in). Markdown became so popular because it was simple and\n" + 
+"somewhat extensible.\n" + 
+"\n" + 
+"Not having a ton of different constructs\n" + 
+"helped Markdown spread. Leaving room for extension helped\n" + 
+"Markdown spread (while the implementations have left something to\n" + 
+"be desired here, the original description was simple enough that\n" + 
+"adding rules that didn't conflict is easy). Most popular sites that\n" + 
+"use Markdown use their own variant of it. Github supports\n" + 
+"`@`mentions and commit hash links; Reddit supports `^`superscripts.\n" + 
+"But Common Markdown takes us further away from both of those\n" + 
+"attributes. If we need Common Markdown + our own extension, the\n" + 
+"most viable way to get that is by forking the Common Markdown\n" + 
+"parser. Writing another parser that complies with all the\n" + 
+"Common Markdown edge cases while adding functionality is a\n" + 
+"huge undertaking, while writing a parser that complies with\n" + 
+"most Markdown people actually use is not.\n" + 
+"\n" + 
+"As [@stuartpb][stuartpb] said on [talk.standardmarkdown.com][],\n" + 
+"\n" + 
+"> ...the goal of Common Markdown should be to specify the smallest\n" + 
+"agreed-upon subset of Markdown features coming from the original\n" + 
+"implementation, and that means not introducing features or changing\n" + 
+"semantics...\n" + 
+"\n" + 
+"We could all use a specification of basic rules that a Markdown\n" + 
+"parser should comply with. But it should be a small, core set\n" + 
+"of rules that allows for simplicity of implementation and\n" + 
+"simplicity of extension.\n" + 
+"\n" + 
+"...And I found out yesterday that a version of this already exists!\n" + 
+"[vmfd (*vanilla-flavoured Markdown*)][vmfd]\n" + 
+"does this quite well. Common Markdown is a wonderful implementation,\n" + 
+"but vmfd is a better standard.\n" + 
+"\n" + 
+"[stuartpb]: http://talk.standardmarkdown.com/users/stuartpb\n" + 
+"[talk.standardmarkdown.com]: http://talk.standardmarkdown.com/t/what-changed-in-standard-markdown/15\n" + 
+"[vmfd]: http://www.vfmd.org/\n" + 
+"\n" + 
+'';
+window.jsonContent = 
+{
+    "question": {
+        "content": CONTENT,
+        "images": {},
+        "widgets": {}
+    },
+    "answerArea": {
+        "type": "multiple",
+        "options": {
+            "content": "",
+            "images": {},
+            "widgets": {}
+        },
+        "calculator": false
+    },
+    "hints": []
+}
+</script>
+<script>
+Perseus.init({skipMathJax: false}).then(function() {
+
+    var content = window.jsonContent.question != null ?
+        window.jsonContent.question : window.jsonContent;
+
+    var props = _.defaults({}, content, {
+        problemNum: 0
+    });
+
+    editor = React.renderComponent(
+        Perseus.Renderer(props, null),
+        document.getElementById("perseus")
+    );
+
+}).then(function() {
+}, function(err) {
+    console.error(err);
+});
+</script>
+</body>
+</html>
