@@ -36,7 +36,7 @@ build_perseus: create_build_dir node_modules/perseus
 	cp -R node_modules/perseus/lib build/perseus/
 
 build_ke: create_build_dir perseus_dev_tools node_modules/perseus
-	./node_modules/.bin/webpack ke.webpack.config.js
+	./node_modules/.bin/webpack --config=ke.webpack.config.js
 	rm -rf build/ke
 	cp -R node_modules/khan-exercises/local-only build/ke
 	cp node_modules/khan-exercises/exercises-stub.js build/ke/
