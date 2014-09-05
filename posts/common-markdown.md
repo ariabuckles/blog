@@ -205,8 +205,8 @@ simplicity of extension.
 
 ...And I found out yesterday that a version of this already exists!
 [vmfd (*vanilla-flavoured Markdown*)][vmfd]
-does this quite well. vmfd is a great standard; Common
-Markdown is a great implementation.
+does this quite well. Common Markdown is a wonderful implementation,
+but vmfd is a better standard.
 
 [stuartpb]: http://talk.standardmarkdown.com/users/stuartpb
 [talk.standardmarkdown.com]: http://talk.standardmarkdown.com/t/what-changed-in-standard-markdown/15
