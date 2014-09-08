@@ -1,7 +1,8 @@
 Why Common Markdown isn't the Solution
 ========================================
 
-[Common Markdown][stmd] (previously Standard Markdown)
+[CommonMark][stmd]
+(previously Common Markdown or Standard Markdown)
 came out yesterday, promising to be a
 single Markdown spec to rule them all. As I've been writing a
 Markdown parser over the past few weeks, this was very exciting!
@@ -9,27 +10,27 @@ Finally I would know what to do about the various edge cases
 not layed out in the [original Markdown syntax specification]
 [mdsyntax]!
 
-First off, Common Markdown looks wonderful to write in. As a
+First off, CommonMark looks wonderful to write in. As a
 content author, it looks like it would be much more preferable
 to the current Markdown parser I'm using. For the vast
 majority of cases, it looks like it does what I would mean
 when I write something, making it very easy to work with as a
 content author. The parser also looks like a nice implementation,
 which is much less hacky than many I've seen. I think it's
-wonderful that Common Markdown is putting effort into making
+wonderful that CommonMark is putting effort into making
 the language better in these directions!
 
-However, Common Markdown states that one of its goals is
+However, CommonMark states that one of its goals is
 "to make Markdown easier to parse, and to eliminate the many
 old inconsistencies and ambiguities that made writing a Markdown
 parser so difficult."
 I've been working on a Markdown parser for the past
-few weeks, and in this respect Common Markdown looks like it
+few weeks, and in this respect CommonMark looks like it
 is going to cause more problems than it solves.
-Common Markdown does a good job of making a lot of decisions
+CommonMark does a good job of making a lot of decisions
 about edge cases, but it does so often by canonizing many
 complex divergences from the original specification.
-Ultimately, this makes [Common Markdown Spec][spec] very long
+Ultimately, this makes [CommonMark Spec][spec] very long
 and riddled with endless intricacies that will make working
 with the language as a programmer more difficult.
 
@@ -79,11 +80,11 @@ than usual, because the middle line is a heading.
 All of this means that it is not possible to write a simple rule for
 when a paragraph (or other block element) ends. When a paragraph
 ends is context dependent on what happens after that paragraph. And
-while the rules are predictable for Common Markdown, there are
+while the rules are predictable for CommonMark, there are
 still a lot of rules, which you need to know when you write a line
 break. But moreover, anyone who adds an extension to the language
 has the possibility of changing the semantics of paragraphs written in
-Common Markdown.
+CommonMark.
 
 For example, if we added github-flavored table syntax, the following:
 
@@ -157,8 +158,8 @@ degrees--several sites allow for embedding only a small subset
 of HTML), we have an HTML grammar in the middle of our
 Markdown specification. This rule alone means that many places
 that would like to support Markdown will not be able to comply
-with Common Markdown--which would be fine if Common Markdown
-was a dialect, but unfortunate if Common Markdown is considered
+with CommonMark--which would be fine if CommonMark
+was a dialect, but unfortunate if CommonMark is considered
 a standard.
 
 ## Why is Markdown everywhere?
@@ -166,13 +167,13 @@ a standard.
 All of these complexities come in the name of writing convenience.
 That certainly seems like a reasonable goal--it would be wonderful if,
 when you write something, your meaning is understood and conveyed into
-the output correctly. That's the road Common Markdown has taken, and
+the output correctly. That's the road CommonMark has taken, and
 it's a reasonable road if you want to build a book-writing platform.
 
 But Markdown didn't get where it is today by being the ideal format
 to write longform text in (it certainly is a wonderful format to
 write longform text in, and if you're looking for a dialect to do
-exactly that, Common Markdown looks like a very nice dialect to
+exactly that, CommonMark looks like a very nice dialect to
 work in). Markdown became so popular because it was simple and
 somewhat extensible.
 
@@ -183,17 +184,17 @@ be desired here, the original description was simple enough that
 adding rules that didn't conflict is easy). Most popular sites that
 use Markdown use their own variant of it. Github supports
 `@`mentions and commit hash links; Reddit supports `^`superscripts.
-But Common Markdown takes us further away from both of those
-attributes. If we need Common Markdown + our own extension, the
-most viable way to get that is by forking the Common Markdown
+But CommonMark takes us further away from both of those
+attributes. If we need CommonMark + our own extension, the
+most viable way to get that is by forking the CommonMark
 parser. Writing another parser that complies with all the
-Common Markdown edge cases while adding functionality is a
+CommonMark edge cases while adding functionality is a
 huge undertaking, while writing a parser that complies with
 most Markdown people actually use is not.
 
 As [@stuartpb][stuartpb] said on [talk.standardmarkdown.com][],
 
-> ...the goal of Common Markdown should be to specify the smallest
+> ...the goal of CommonMark should be to specify the smallest
 agreed-upon subset of Markdown features coming from the original
 implementation, and that means not introducing features or changing
 semantics...
@@ -204,11 +205,11 @@ of rules that allows for simplicity of implementation and
 simplicity of extension.
 
 ...And I found out yesterday that a version of this already exists!
-[vmfd (*vanilla-flavoured Markdown*)][vmfd]
-does this quite well. Common Markdown is a wonderful implementation,
-but vmfd is a better standard.
+[vfmd (*vanilla-flavoured Markdown*)][vfmd]
+does this quite well. CommonMark is a wonderful implementation,
+but vfmd is a better standard.
 
 [stuartpb]: http://talk.standardmarkdown.com/users/stuartpb
 [talk.standardmarkdown.com]: http://talk.standardmarkdown.com/t/what-changed-in-standard-markdown/15
-[vmfd]: http://www.vfmd.org/
+[vfmd]: http://www.vfmd.org/
 
