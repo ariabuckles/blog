@@ -66,7 +66,8 @@ var CONTENT = '' +
 "Why Common Markdown isn't the Solution\n" + 
 "========================================\n" + 
 "\n" + 
-"[Common Markdown][stmd] (previously Standard Markdown)\n" + 
+"[CommonMark][stmd]\n" + 
+"(previously Common Markdown or Standard Markdown)\n" + 
 "came out yesterday, promising to be a\n" + 
 "single Markdown spec to rule them all. As I've been writing a\n" + 
 "Markdown parser over the past few weeks, this was very exciting!\n" + 
@@ -74,27 +75,27 @@ var CONTENT = '' +
 "not layed out in the [original Markdown syntax specification]\n" + 
 "[mdsyntax]!\n" + 
 "\n" + 
-"First off, Common Markdown looks wonderful to write in. As a\n" + 
+"First off, CommonMark looks wonderful to write in. As a\n" + 
 "content author, it looks like it would be much more preferable\n" + 
 "to the current Markdown parser I'm using. For the vast\n" + 
 "majority of cases, it looks like it does what I would mean\n" + 
 "when I write something, making it very easy to work with as a\n" + 
 "content author. The parser also looks like a nice implementation,\n" + 
 "which is much less hacky than many I've seen. I think it's\n" + 
-"wonderful that Common Markdown is putting effort into making\n" + 
+"wonderful that CommonMark is putting effort into making\n" + 
 "the language better in these directions!\n" + 
 "\n" + 
-"However, Common Markdown states that one of its goals is\n" + 
+"However, CommonMark states that one of its goals is\n" + 
 "\"to make Markdown easier to parse, and to eliminate the many\n" + 
 "old inconsistencies and ambiguities that made writing a Markdown\n" + 
 "parser so difficult.\"\n" + 
 "I've been working on a Markdown parser for the past\n" + 
-"few weeks, and in this respect Common Markdown looks like it\n" + 
+"few weeks, and in this respect CommonMark looks like it\n" + 
 "is going to cause more problems than it solves.\n" + 
-"Common Markdown does a good job of making a lot of decisions\n" + 
+"CommonMark does a good job of making a lot of decisions\n" + 
 "about edge cases, but it does so often by canonizing many\n" + 
 "complex divergences from the original specification.\n" + 
-"Ultimately, this makes [Common Markdown Spec][spec] very long\n" + 
+"Ultimately, this makes [CommonMark Spec][spec] very long\n" + 
 "and riddled with endless intricacies that will make working\n" + 
 "with the language as a programmer more difficult.\n" + 
 "\n" + 
@@ -144,11 +145,11 @@ var CONTENT = '' +
 "All of this means that it is not possible to write a simple rule for\n" + 
 "when a paragraph (or other block element) ends. When a paragraph\n" + 
 "ends is context dependent on what happens after that paragraph. And\n" + 
-"while the rules are predictable for Common Markdown, there are\n" + 
+"while the rules are predictable for CommonMark, there are\n" + 
 "still a lot of rules, which you need to know when you write a line\n" + 
 "break. But moreover, anyone who adds an extension to the language\n" + 
 "has the possibility of changing the semantics of paragraphs written in\n" + 
-"Common Markdown.\n" + 
+"CommonMark.\n" + 
 "\n" + 
 "For example, if we added github-flavored table syntax, the following:\n" + 
 "\n" + 
@@ -222,8 +223,8 @@ var CONTENT = '' +
 "of HTML), we have an HTML grammar in the middle of our\n" + 
 "Markdown specification. This rule alone means that many places\n" + 
 "that would like to support Markdown will not be able to comply\n" + 
-"with Common Markdown--which would be fine if Common Markdown\n" + 
-"was a dialect, but unfortunate if Common Markdown is considered\n" + 
+"with CommonMark--which would be fine if CommonMark\n" + 
+"was a dialect, but unfortunate if CommonMark is considered\n" + 
 "a standard.\n" + 
 "\n" + 
 "## Why is Markdown everywhere?\n" + 
@@ -231,13 +232,13 @@ var CONTENT = '' +
 "All of these complexities come in the name of writing convenience.\n" + 
 "That certainly seems like a reasonable goal--it would be wonderful if,\n" + 
 "when you write something, your meaning is understood and conveyed into\n" + 
-"the output correctly. That's the road Common Markdown has taken, and\n" + 
+"the output correctly. That's the road CommonMark has taken, and\n" + 
 "it's a reasonable road if you want to build a book-writing platform.\n" + 
 "\n" + 
 "But Markdown didn't get where it is today by being the ideal format\n" + 
 "to write longform text in (it certainly is a wonderful format to\n" + 
 "write longform text in, and if you're looking for a dialect to do\n" + 
-"exactly that, Common Markdown looks like a very nice dialect to\n" + 
+"exactly that, CommonMark looks like a very nice dialect to\n" + 
 "work in). Markdown became so popular because it was simple and\n" + 
 "somewhat extensible.\n" + 
 "\n" + 
@@ -248,17 +249,17 @@ var CONTENT = '' +
 "adding rules that didn't conflict is easy). Most popular sites that\n" + 
 "use Markdown use their own variant of it. Github supports\n" + 
 "`@`mentions and commit hash links; Reddit supports `^`superscripts.\n" + 
-"But Common Markdown takes us further away from both of those\n" + 
-"attributes. If we need Common Markdown + our own extension, the\n" + 
-"most viable way to get that is by forking the Common Markdown\n" + 
+"But CommonMark takes us further away from both of those\n" + 
+"attributes. If we need CommonMark + our own extension, the\n" + 
+"most viable way to get that is by forking the CommonMark\n" + 
 "parser. Writing another parser that complies with all the\n" + 
-"Common Markdown edge cases while adding functionality is a\n" + 
+"CommonMark edge cases while adding functionality is a\n" + 
 "huge undertaking, while writing a parser that complies with\n" + 
 "most Markdown people actually use is not.\n" + 
 "\n" + 
 "As [@stuartpb][stuartpb] said on [talk.standardmarkdown.com][],\n" + 
 "\n" + 
-"> ...the goal of Common Markdown should be to specify the smallest\n" + 
+"> ...the goal of CommonMark should be to specify the smallest\n" + 
 "agreed-upon subset of Markdown features coming from the original\n" + 
 "implementation, and that means not introducing features or changing\n" + 
 "semantics...\n" + 
@@ -269,13 +270,13 @@ var CONTENT = '' +
 "simplicity of extension.\n" + 
 "\n" + 
 "...And I found out yesterday that a version of this already exists!\n" + 
-"[vmfd (*vanilla-flavoured Markdown*)][vmfd]\n" + 
-"does this quite well. Common Markdown is a wonderful implementation,\n" + 
-"but vmfd is a better standard.\n" + 
+"[vfmd (*vanilla-flavoured Markdown*)][vfmd]\n" + 
+"does this quite well. CommonMark is a wonderful implementation,\n" + 
+"but vfmd is a better standard.\n" + 
 "\n" + 
 "[stuartpb]: http://talk.standardmarkdown.com/users/stuartpb\n" + 
 "[talk.standardmarkdown.com]: http://talk.standardmarkdown.com/t/what-changed-in-standard-markdown/15\n" + 
-"[vmfd]: http://www.vfmd.org/\n" + 
+"[vfmd]: http://www.vfmd.org/\n" + 
 "\n" + 
 '';
 window.jsonContent = 
