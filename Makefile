@@ -30,8 +30,8 @@ perseus_dev_tools:
 
 build_perseus: create_build_dir node_modules/perseus
 	cd node_modules/perseus && make build
-	cp node_modules/perseus/build/perseus-1.js build/perseus.js
-	cp node_modules/perseus/build/perseus-1.css build/perseus.css
+	cp node_modules/perseus/build/perseus-2.js build/perseus.js
+	cp node_modules/perseus/build/perseus-2.css build/perseus.css
 	rm -rf build/perseus/
 	cp -R node_modules/perseus/lib build/perseus/
 
